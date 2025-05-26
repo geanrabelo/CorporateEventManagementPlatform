@@ -10,5 +10,5 @@ public record EventCreationDTO(String tittle,
                                @JsonFormat(pattern = "yyyy-MM-dd")
                                LocalDate date,
                                String objective,
-                               User responsible_id) {
+                               Long responsible_id) {
 }
