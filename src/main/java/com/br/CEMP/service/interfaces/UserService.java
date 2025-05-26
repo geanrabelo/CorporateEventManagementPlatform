@@ -1,7 +1,7 @@
 package com.br.CEMP.service.interfaces;
 
-import com.br.CEMP.dto.AuthenticationDTO;
-import com.br.CEMP.dto.RegisterDTO;
+import com.br.CEMP.dto.user.AuthenticationDTO;
+import com.br.CEMP.dto.user.RegisterDTO;
 
 public interface UserService {
 
