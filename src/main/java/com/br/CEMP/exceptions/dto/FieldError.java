@@ -1,4 +1,5 @@
 package com.br.CEMP.exceptions.dto;
 
-public record FieldError() {
+public record FieldError(String field,
+                         String message) {
 }
