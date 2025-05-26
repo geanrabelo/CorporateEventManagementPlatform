@@ -1,5 +1,6 @@
 package com.br.CEMP.model;
 
+import com.br.CEMP.model.enums.Roles;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
