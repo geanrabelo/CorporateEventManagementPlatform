@@ -30,8 +30,8 @@ public class SecurityFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = recoverToken(request);
         if(token != null){
-            String email = tokenService.validateToken(token);
-            UserDetails user = authenticationService.loadUserByUsername(email);
+            String username = tokenService.validateToken(token);
+            UserDetails user = authenticationService.loadUserByUsername(username);
 
             var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 
