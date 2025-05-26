@@ -19,6 +19,7 @@ import java.util.List;
 @EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -66,5 +67,12 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
+    }
+
+    public User(String username, String email, String password, Roles roles) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
     }
 }
