@@ -2,7 +2,10 @@ package com.br.CEMP.service.impl;
 
 import com.br.CEMP.dto.AuthenticationDTO;
 import com.br.CEMP.dto.RegisterDTO;
+import com.br.CEMP.exceptions.ex.UserAlreadyExistsEmail;
+import com.br.CEMP.exceptions.ex.UserAlreadyExistsUsername;
 import com.br.CEMP.model.User;
+import com.br.CEMP.model.enums.EnumCode;
 import com.br.CEMP.repository.UserRepository;
 import com.br.CEMP.service.TokenService;
 import com.br.CEMP.service.interfaces.UserService;
@@ -37,9 +40,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String register(RegisterDTO registerDTO) {
-        if(userRepository.existsByEmail(registerDTO.email()) || userRepository.existsByUsername(registerDTO.username())){
-            //throw new Exception();
-        }
+
+        verifyAlreadyExists(registerDTO);
+
         String passwordCrypt = new BCryptPasswordEncoder().encode(registerDTO.password());
 
         User user = new User(registerDTO.username(), registerDTO.email(), passwordCrypt, registerDTO.roles());
@@ -47,5 +50,14 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         return "User registered successfully";
+    }
+
+    private void verifyAlreadyExists(RegisterDTO registerDTO){
+        if(userRepository.existsByUsername(registerDTO.username())){
+            throw new UserAlreadyExistsUsername(EnumCode.USR000.getMessage());
+        }
+        if(userRepository.existsByEmail(registerDTO.email())){
+            throw new UserAlreadyExistsEmail(EnumCode.USR001.getMessage());
+        }
     }
 }
