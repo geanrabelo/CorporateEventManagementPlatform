@@ -30,4 +30,5 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "responsible_id")
     private User responsible;
+
 }

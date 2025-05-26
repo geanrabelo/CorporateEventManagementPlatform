@@ -1,8 +1,8 @@
 package com.br.CEMP.exceptions;
 
 import com.br.CEMP.exceptions.dto.ErrorResponse;
-import com.br.CEMP.exceptions.ex.UserAlreadyExistsEmail;
-import com.br.CEMP.exceptions.ex.UserAlreadyExistsUsername;
+import com.br.CEMP.exceptions.ex.UserAlreadyExistsByEmail;
+import com.br.CEMP.exceptions.ex.UserAlreadyExistsByUsername;
 import com.br.CEMP.exceptions.ex.UserNotFound;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(UserAlreadyExistsEmail.class)
+    @ExceptionHandler(UserAlreadyExistsByEmail.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorResponse userAlreadyExistsEmailHandler(UserAlreadyExistsEmail userAlreadyExistsEmail){
-        return ErrorResponse.conflict(userAlreadyExistsEmail.getMessage());
+    public ErrorResponse userAlreadyExistsEmailHandler(UserAlreadyExistsByEmail userAlreadyExistsByEmail){
+        return ErrorResponse.conflict(userAlreadyExistsByEmail.getMessage());
     }
 
-    @ExceptionHandler(UserAlreadyExistsUsername.class)
+    @ExceptionHandler(UserAlreadyExistsByUsername.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorResponse userAlreadyExistsUsernameHandler(UserAlreadyExistsUsername userAlreadyExistsUsername){
-        return ErrorResponse.conflict(userAlreadyExistsUsername.getMessage());
+    public ErrorResponse userAlreadyExistsUsernameHandler(UserAlreadyExistsByUsername userAlreadyExistsByUsername){
+        return ErrorResponse.conflict(userAlreadyExistsByUsername.getMessage());
     }
 
     @ExceptionHandler(UserNotFound.class)

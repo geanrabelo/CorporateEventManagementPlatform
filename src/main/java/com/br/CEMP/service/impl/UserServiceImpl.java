@@ -2,8 +2,8 @@ package com.br.CEMP.service.impl;
 
 import com.br.CEMP.dto.user.AuthenticationDTO;
 import com.br.CEMP.dto.user.RegisterDTO;
-import com.br.CEMP.exceptions.ex.UserAlreadyExistsEmail;
-import com.br.CEMP.exceptions.ex.UserAlreadyExistsUsername;
+import com.br.CEMP.exceptions.ex.UserAlreadyExistsByEmail;
+import com.br.CEMP.exceptions.ex.UserAlreadyExistsByUsername;
 import com.br.CEMP.model.User;
 import com.br.CEMP.model.enums.EnumCode;
 import com.br.CEMP.repository.UserRepository;
@@ -54,10 +54,10 @@ public class UserServiceImpl implements UserService {
 
     private void verifyAlreadyExists(RegisterDTO registerDTO){
         if(userRepository.existsByUsername(registerDTO.username())){
-            throw new UserAlreadyExistsUsername(EnumCode.USR000.getMessage());
+            throw new UserAlreadyExistsByUsername(EnumCode.USR000.getMessage());
         }
         if(userRepository.existsByEmail(registerDTO.email())){
-            throw new UserAlreadyExistsEmail(EnumCode.USR001.getMessage());
+            throw new UserAlreadyExistsByEmail(EnumCode.USR001.getMessage());
         }
     }
 }
