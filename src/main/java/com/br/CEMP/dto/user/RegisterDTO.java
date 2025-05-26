@@ -1,4 +1,4 @@
-package com.br.CEMP.dto;
+package com.br.CEMP.dto.user;
 
 import com.br.CEMP.model.enums.Roles;
 
