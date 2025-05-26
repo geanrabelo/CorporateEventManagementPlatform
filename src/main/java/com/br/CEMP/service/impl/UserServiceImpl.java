@@ -2,8 +2,8 @@ package com.br.CEMP.service.impl;
 
 import com.br.CEMP.dto.user.AuthenticationDTO;
 import com.br.CEMP.dto.user.RegisterDTO;
-import com.br.CEMP.exceptions.ex.UserAlreadyExistsByEmail;
-import com.br.CEMP.exceptions.ex.UserAlreadyExistsByUsername;
+import com.br.CEMP.exceptions.ex.user.UserAlreadyExistsByEmail;
+import com.br.CEMP.exceptions.ex.user.UserAlreadyExistsByUsername;
 import com.br.CEMP.model.User;
 import com.br.CEMP.model.enums.EnumCode;
 import com.br.CEMP.repository.UserRepository;

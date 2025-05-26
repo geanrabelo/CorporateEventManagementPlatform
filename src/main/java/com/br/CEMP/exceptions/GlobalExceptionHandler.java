@@ -1,7 +1,11 @@
 package com.br.CEMP.exceptions;
 
 import com.br.CEMP.exceptions.dto.ErrorResponse;
-import com.br.CEMP.exceptions.ex.*;
+import com.br.CEMP.exceptions.ex.event.EventAlreadyExistsByTittle;
+import com.br.CEMP.exceptions.ex.event.EventNotFound;
+import com.br.CEMP.exceptions.ex.user.UserAlreadyExistsByEmail;
+import com.br.CEMP.exceptions.ex.user.UserAlreadyExistsByUsername;
+import com.br.CEMP.exceptions.ex.user.UserNotFound;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

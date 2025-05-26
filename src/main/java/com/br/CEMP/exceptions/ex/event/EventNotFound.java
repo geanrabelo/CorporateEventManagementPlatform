@@ -1,4 +1,4 @@
-package com.br.CEMP.exceptions.ex;
+package com.br.CEMP.exceptions.ex.event;
 
 public class EventNotFound extends RuntimeException {
     public EventNotFound(String message) {
