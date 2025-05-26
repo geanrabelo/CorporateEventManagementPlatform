@@ -25,12 +25,10 @@ public class Event {
 
     private LocalDate date;
 
-    private String location;
-
-    private Integer capacity;
+    private String objective;
 
     @ManyToOne
-    @JoinColumn(name = "organizator_id")
-    private User organizator;
+    @JoinColumn(name = "responsible_id")
+    private User responsible;
 
 }
