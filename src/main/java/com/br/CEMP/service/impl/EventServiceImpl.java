@@ -73,8 +73,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventDetailsDTO update(EventUpdateDTO eventUpdateDTO) {
-        if(existsById(eventUpdateDTO.id())){
-            Event eventDatabase = eventRepository.getReferenceById(eventUpdateDTO.id());
+        if(existsById(UUID.fromString(eventUpdateDTO.id()))){
+            Event eventDatabase = eventRepository.getReferenceById(UUID.fromString(eventUpdateDTO.id()));
             Event eventDatabaseUpdated = updating(eventUpdateDTO, eventDatabase);
             Event eventSaved = eventRepository.save(eventDatabaseUpdated);
             return new EventDetailsDTO(eventSaved);
