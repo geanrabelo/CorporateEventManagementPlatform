@@ -5,7 +5,8 @@ public enum EnumCode {
     USR001("Already registered this email"),
     USR003("User find by id not found"),
     EVT000("Already exists event with tittle"),
-    EVT001("Event find by id not found");
+    EVT001("Event find by id not found"),
+    EVT002("Event date invalid");
 
     private String message;
 
