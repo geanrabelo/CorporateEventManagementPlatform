@@ -2,6 +2,7 @@ package com.br.CEMP.exceptions;
 
 import com.br.CEMP.exceptions.dto.ErrorResponse;
 import com.br.CEMP.exceptions.ex.event.EventAlreadyExistsByTittle;
+import com.br.CEMP.exceptions.ex.event.EventDateInvalid;
 import com.br.CEMP.exceptions.ex.event.EventNotFound;
 import com.br.CEMP.exceptions.ex.user.UserAlreadyExistsByEmail;
 import com.br.CEMP.exceptions.ex.user.UserAlreadyExistsByUsername;
@@ -42,5 +43,11 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse eventNotFoundHandler(EventNotFound eventNotFound){
         return ErrorResponse.notFound(eventNotFound.getMessage());
+    }
+
+    @ExceptionHandler(EventDateInvalid.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse eventDateInvalidHandler(EventDateInvalid eventDateInvalid){
+        return ErrorResponse.badRequest(eventDateInvalid.getMessage());
     }
 }
