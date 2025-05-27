@@ -1,10 +1,10 @@
 package com.br.CEMP.dto.event;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public record EventUpdateDTO(String id,
                              String tittle,
                              String description,
-                             LocalDate date,
+                             LocalDateTime date,
                              String objective) {
 }
