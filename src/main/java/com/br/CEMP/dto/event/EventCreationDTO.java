@@ -1,6 +1,5 @@
 package com.br.CEMP.dto.event;
 
-import com.br.CEMP.model.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 
