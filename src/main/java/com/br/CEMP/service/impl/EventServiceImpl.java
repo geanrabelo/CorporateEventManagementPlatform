@@ -5,7 +5,10 @@ import com.br.CEMP.dto.event.EventDetailsDTO;
 import com.br.CEMP.dto.event.EventUpdateDTO;
 import com.br.CEMP.exceptions.ex.event.EventAlreadyExistsByTittle;
 import com.br.CEMP.exceptions.ex.event.EventNotFound;
-import com.br.CEMP.exceptions.ex.user.UserNotFound;
+import com.br.CEMP.exceptions.ex.validations.event.EventValidationDTO;
+import com.br.CEMP.exceptions.ex.validations.event.impl.EventDateValidationImpl;
+import com.br.CEMP.exceptions.ex.validations.event.impl.EventTittleExistsValidationImpl;
+import com.br.CEMP.exceptions.ex.validations.event.impl.EventUserValidationImpl;
 import com.br.CEMP.model.Event;
 import com.br.CEMP.model.User;
 import com.br.CEMP.model.enums.EnumCode;
@@ -14,10 +17,8 @@ import com.br.CEMP.repository.UserRepository;
 import com.br.CEMP.service.interfaces.EventService;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -25,32 +26,39 @@ public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
+    private final EventDateValidationImpl eventDateValidation;
+    private final EventTittleExistsValidationImpl eventTittleExistsValidation;
+    private final EventUserValidationImpl eventUserValidation;
 
-    public EventServiceImpl(EventRepository eventRepository, UserRepository userRepository){
+    public EventServiceImpl(EventRepository eventRepository,
+                            UserRepository userRepository,
+                            EventDateValidationImpl eventDateValidation,
+                            EventTittleExistsValidationImpl eventTittleExistsValidation,
+                            EventUserValidationImpl eventUserValidation){
         this.eventRepository = eventRepository;
         this.userRepository = userRepository;
+        this.eventDateValidation = eventDateValidation;
+        this.eventTittleExistsValidation = eventTittleExistsValidation;
+        this.eventUserValidation = eventUserValidation;
     }
 
     @Override
     public String saveEvent(EventCreationDTO eventCreationDTO) {
-        if(eventRepository.existsByTittle(eventCreationDTO.tittle())){
-            throw new EventAlreadyExistsByTittle(EnumCode.EVT000.getMessage());
-        }
-        Optional<User> user = userRepository.findById(eventCreationDTO.responsible_id());
-        if(user.isPresent()){
-            Event conversion = Event
-                    .builder()
-                    .tittle(eventCreationDTO.tittle())
-                    .description(eventCreationDTO.description())
-                    .date(eventCreationDTO.date())
-                    .objective(eventCreationDTO.objective())
-                    .responsible(user.get())
-                    .build();
-            Event eventSaved = eventRepository.save(conversion);
+        eventTittleExistsValidation.validateTittle(new EventValidationDTO(eventCreationDTO, userRepository), eventRepository);
+        eventDateValidation.validateDate(new EventValidationDTO(eventCreationDTO, userRepository));
+        eventUserValidation.validateUser(new EventValidationDTO(eventCreationDTO, userRepository));
 
-            return "Event Registered Successfully - ID : { "+eventSaved.getId()+" }";
-        }
-        throw new UserNotFound(EnumCode.USR003.getMessage());
+        User user = userRepository.getReferenceById(eventCreationDTO.responsible_id());
+        Event conversion = Event
+                .builder()
+                .tittle(eventCreationDTO.tittle())
+                .description(eventCreationDTO.description())
+                .date(eventCreationDTO.date())
+                .objective(eventCreationDTO.objective())
+                .responsible(user)
+                .build();
+        Event eventSaved = eventRepository.save(conversion);
+        return "Event Registered Successfully - ID : { "+eventSaved.getId()+" }";
     }
 
     @Override
