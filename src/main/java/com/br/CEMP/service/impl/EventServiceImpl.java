@@ -15,6 +15,7 @@ import com.br.CEMP.service.interfaces.EventService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -84,7 +85,7 @@ public class EventServiceImpl implements EventService {
     private Event updating(EventUpdateDTO eventUpdateDTO, Event eventDatabase){
         String tittle = eventUpdateDTO.tittle();
         String description = eventUpdateDTO.description();
-        LocalDate date = eventUpdateDTO.date();
+        LocalDateTime date = eventUpdateDTO.date();
         String objective = eventUpdateDTO.objective();
         if(tittle != null){
             eventDatabase.setTittle(tittle);
