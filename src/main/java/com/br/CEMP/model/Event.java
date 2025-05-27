@@ -3,7 +3,7 @@ package com.br.CEMP.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -23,7 +23,7 @@ public class Event {
 
     private String description;
 
-    private LocalDate date;
+    private LocalDateTime date;
 
     private String objective;
 
