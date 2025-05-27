@@ -32,8 +32,8 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize ->
                         authorize.requestMatchers(HttpMethod.POST,"/v1/cemp/auth/**").permitAll()
-                                .requestMatchers(HttpMethod.POST,"/v1/cemp/event/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET,"/v1/cemp/event/**").hasRole("USER")
+                                .requestMatchers(HttpMethod.POST,"/v1/cemp/event").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET,"/v1/cemp/event/**").hasAnyRole("ADMIN", "USER")
                                 .requestMatchers(HttpMethod.PUT,"/v1/cemp/event/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.DELETE,"/v1/cemp/event/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
