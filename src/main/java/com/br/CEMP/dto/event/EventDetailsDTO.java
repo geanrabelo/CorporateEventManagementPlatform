@@ -3,12 +3,13 @@ package com.br.CEMP.dto.event;
 import com.br.CEMP.model.Event;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record EventDetailsDTO(UUID id,
                               String tittle,
                               String description,
-                              LocalDate date,
+                              LocalDateTime date,
                               String objective,
                               Long responsible_id) {
     public EventDetailsDTO(Event event){
