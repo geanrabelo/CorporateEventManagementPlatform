@@ -87,16 +87,16 @@ public class EventServiceImpl implements EventService {
         String description = eventUpdateDTO.description();
         LocalDateTime date = eventUpdateDTO.date();
         String objective = eventUpdateDTO.objective();
-        if(tittle != null){
+        if(!tittle.isEmpty()){
             eventDatabase.setTittle(tittle);
         }
-        if(description != null){
+        if(!description.isEmpty()){
             eventDatabase.setDescription(description);
         }
         if(date != null){
             eventDatabase.setDate(date);
         }
-        if(objective != null){
+        if(!objective.isEmpty()){
             eventDatabase.setObjective(objective);
         }
         return eventDatabase;
